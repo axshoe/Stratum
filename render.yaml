@@ -1,0 +1,15 @@
+# render.yaml
+# Drop this file in your repo root.
+# Render reads this automatically on deploy.
+
+services:
+  - type: web
+    name: stratum
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:server --bind 0.0.0.0:$PORT --timeout 120 --workers 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: CENSUS_API_KEY
+        sync: false
