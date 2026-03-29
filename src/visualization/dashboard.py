@@ -372,3 +372,20 @@ def create_app(df: pd.DataFrame, meta: dict, regression_df: pd.DataFrame) -> das
             return html.P(f"Error loading county data: {e}", style={"color": "red"})
 
     return app
+
+# src/visualization/dashboard.py
+
+# Only add at the very bottom
+if __name__ == "__main__":
+    # Example: load some dummy data to run locally
+    import pandas as pd
+
+    # You can replace this with your real data load logic
+    df = pd.DataFrame(columns=["fips", "county_name", "state", "mbi", "mbi_category"])
+    meta = {"weights": {}, "n_counties": 0, "mbi_mean": 0, "explained_variance": 0.0}
+    regression_df = pd.DataFrame()
+
+    app = create_app(df, meta, regression_df)
+    server = app.server  # This is what Render will use
+
+    app.run_server(debug=True)
