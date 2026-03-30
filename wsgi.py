@@ -1,13 +1,7 @@
-# wsgi.py
-# ─────────────────────────────────────────────────────────────────────────────
-# Gunicorn entry point for Render deployment.
-# Run with: gunicorn wsgi:server
-# ─────────────────────────────────────────────────────────────────────────────
-
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -28,4 +22,4 @@ reg_df = factor_regression(df_mbi)
 print(f"MBI computed for {meta['n_counties']} counties. Launching server...")
 
 app = create_app(df_mbi, meta, reg_df)
-server = app.server  # Flask server object — gunicorn binds to this
+server = app.server
